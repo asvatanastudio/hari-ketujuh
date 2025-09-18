@@ -19,20 +19,24 @@ if (!fs.existsSync(contactsFile)) {
 
 rl.question('Masukkan nama anda: ', (nama) => {
     rl.question('Masukkan No hp: ', (nohp) => {
-        // Buat objek contact
-        const contact = { nama: nama, nohp: nohp };
-        
-        // Baca file contacts.json dan parsing isinya
-        const file = fs.readFileSync(contactsFile, 'utf-8');
-        const contacts = JSON.parse(file);
+        rl.question('usia: ', (usia) => {
+            rl.question('hobi: ', (hobi) => {
+                // Buat objek contact
+                const contact = { nama: nama, nohp: nohp, usia: usia, hobi: hobi };
+                
+                // Baca file contacts.json dan parsing isinya
+                const file = fs.readFileSync(contactsFile, 'utf-8');
+                const contacts = JSON.parse(file);
 
-        // Tambah data contact baru
-        contacts.push(contact);
+                // Tambah data contact baru
+                contacts.push(contact);
 
-        // Simpan kembali ke file
-        fs.writeFileSync(contactsFile, JSON.stringify(contacts, null, 2));
+                // Simpan kembali ke file
+                fs.writeFileSync(contactsFile, JSON.stringify(contacts, null, 2));
 
-        console.log(`Terima kasih ${nama} dengan No hp ${nohp}`);
-        rl.close();
+                console.log(`Terima kasih ${nama} dengan No hp ${nohp} usia ${usia} hobi ${hobi}`);
+                rl.close();
+            });
+        });
     });
 });
